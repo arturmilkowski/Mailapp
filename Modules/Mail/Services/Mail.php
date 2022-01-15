@@ -18,7 +18,13 @@ class Mail
      */
     public static function handle(array $data): bool
     {
-        MailFacade::to($data['to'])->send(new AppMail($data));
+        collect()
+            ->range(1, 50)
+            ->each(
+                function () use ($data) {
+                    MailFacade::to($data['to'])->send(new AppMail($data));
+                }
+            );
 
         return true;
     }
