@@ -1,11 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Mail\Http\Controllers;
 
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+// use Illuminate\Support\Facades\Mail;
 use Modules\Mail\Http\Requests\CreateMailRequest;
+// use Modules\Mail\Emails\AppMail;
+use Modules\Mail\Services\Mail as MailService;
 
 class MailController extends Controller
 {
@@ -34,9 +39,9 @@ class MailController extends Controller
      */
     public function store(CreateMailRequest $request)
     {
-        // return $request;
         $validated = $request->validated();
-        return $validated;
+
+        MailService::handle($validated);
     }
 
     /**
