@@ -26,9 +26,12 @@ Route::get(
 
 require __DIR__.'/auth.php';
 
+// Route::middleware(['first', 'second'])->group(function () {});
+
 Route::resource('mails', MailController::class)
     ->only(['index', 'create', 'store'])
     ->middleware(['auth', 'ban']);
-Route::resource('pages', PageController::class);
+Route::resource('pages', PageController::class)->middleware('auth');
+
 Route::get('/403', Error::class)->name('403');
 Route::get('/{subpage:slug?}', [SubpageController::class, 'show'])->name('subpage');

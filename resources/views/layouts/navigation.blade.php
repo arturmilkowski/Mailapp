@@ -16,7 +16,10 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                     <x-nav-link :href="route('mails.index')" :active="request()->routeIs('mails.index')">
-                        {{ __('Mail') }}
+                        {{ __('Mails') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('pages.index')" :active="request()->routeIs('pages.index')">
+                        {{ __('Pages') }}
                     </x-nav-link>
                 </div>
             </div>
