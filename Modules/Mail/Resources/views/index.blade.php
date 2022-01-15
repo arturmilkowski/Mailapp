@@ -1,9 +1,9 @@
 @extends('mail::layouts.master')
 
 @section('content')
-    <h1>Hello World</h1>
+    <h1>Mail App</h1>
 
     <p>
-        This view is loaded from module: {!! config('mail.name') !!}
+        <a href="{{ route('mails.create') }}" title="">Create</a>
     </p>
 @endsection

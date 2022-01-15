@@ -25,6 +25,7 @@
                 <textarea id="content" name="content" placeholder="Field is required" required>{{ old('content') }}</textarea>
                 @error('content')<div class="alert alert-danger">{{ $message }}</div>@enderror
             </p>
+            <a href="{{ route('mails.index') }}" title="Home page">Back</a> |
             <button type="submit">Send</button>
         </form>
     </p>

@@ -11,30 +11,41 @@ use Illuminate\Routing\Controller;
 use Modules\Mail\Http\Requests\CreateMailRequest;
 // use Modules\Mail\Emails\AppMail;
 use Modules\Mail\Services\Mail as MailService;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class MailController extends Controller
 {
     /**
      * Display a listing of the resource.
+     * 
      * @return Renderable
      */
-    public function index()
+    public function index(): Renderable
     {
+        // if (! Gate::allows('send-mail')) {
+        //     abort(403);
+        // }
+
         return view('mail::index');
     }
 
     /**
      * Show the form for creating a new resource.
+     * 
      * @return Renderable
      */
-    public function create()
+    public function create(): Renderable
     {
         return view('mail::create');
     }
 
     /**
      * Store a newly created resource in storage.
-     * @param Request $request
+     * 
+     * @param Request $request Validation
+     * 
      * @return Renderable
      */
     public function store(CreateMailRequest $request)
@@ -42,46 +53,5 @@ class MailController extends Controller
         $validated = $request->validated();
 
         MailService::handle($validated);
-    }
-
-    /**
-     * Show the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
-    public function show($id)
-    {
-        return view('mail::show');
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
-    public function edit($id)
-    {
-        return view('mail::edit');
-    }
-
-    /**
-     * Update the specified resource in storage.
-     * @param Request $request
-     * @param int $id
-     * @return Renderable
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     * @param int $id
-     * @return Renderable
-     */
-    public function destroy($id)
-    {
-        //
     }
 }
