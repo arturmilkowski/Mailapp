@@ -32,6 +32,6 @@ Route::get(
 require __DIR__.'/auth.php';
 
 Route::resource('mails', MailController::class)
-    ->only(['index', 'create'])
+    ->only(['index', 'create', 'store'])
     ->middleware(['auth', 'ban']);
 Route::get('/403', Error::class)->name('403');

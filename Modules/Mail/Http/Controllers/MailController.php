@@ -7,13 +7,10 @@ namespace Modules\Mail\Http\Controllers;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-// use Illuminate\Support\Facades\Mail;
+use Illuminate\Http\RedirectResponse;
 use Modules\Mail\Http\Requests\CreateMailRequest;
-// use Modules\Mail\Emails\AppMail;
 use Modules\Mail\Services\Mail as MailService;
-use App\Models\User;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Gate;
+// use Illuminate\Support\Facades\Gate;
 
 class MailController extends Controller
 {
@@ -28,7 +25,7 @@ class MailController extends Controller
         //     abort(403);
         // }
 
-        return view('mail::index');
+        return view('mail::mail.index');
     }
 
     /**
@@ -38,7 +35,7 @@ class MailController extends Controller
      */
     public function create(): Renderable
     {
-        return view('mail::create');
+        return view('mail::mail.create');
     }
 
     /**
@@ -48,10 +45,11 @@ class MailController extends Controller
      * 
      * @return Renderable
      */
-    public function store(CreateMailRequest $request)
+    public function store(CreateMailRequest $request): RedirectResponse
     {
         $validated = $request->validated();
-
         MailService::handle($validated);
+
+        return redirect()->route('mails.index')->with('status', 'Sent');
     }
 }
