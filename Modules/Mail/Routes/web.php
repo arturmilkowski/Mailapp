@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use Modules\Mail\Http\Controllers\MailController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,20 +11,6 @@ use Modules\Mail\Http\Controllers\MailController;
 |
 */
 
-Route::get(
-    '/',
-    function () {
-        return view('welcome');
-    }
-);
-
-Route::get(
-    '/dashboard',
-    function () {
-        return view('dashboard');
-    }
-)->middleware(['auth'])->name('dashboard');
-
-require __DIR__.'/auth.php';
-
-Route::resource('mails', MailController::class);
+Route::prefix('mail')->group(function() {
+    Route::get('/', 'MailController@index');
+});
