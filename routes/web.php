@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Modules\Mail\Http\Controllers\MailController;
 use Modules\Mail\Http\Controllers\Error;
+use Modules\Page\Http\Controllers\PageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,4 +35,5 @@ require __DIR__.'/auth.php';
 Route::resource('mails', MailController::class)
     ->only(['index', 'create', 'store'])
     ->middleware(['auth', 'ban']);
+Route::resource('pages', PageController::class);
 Route::get('/403', Error::class)->name('403');
