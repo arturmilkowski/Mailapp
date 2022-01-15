@@ -1,0 +1,13 @@
+{
+    "name": "Subpage",
+    "alias": "subpage",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Subpage\\Providers\\SubpageServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

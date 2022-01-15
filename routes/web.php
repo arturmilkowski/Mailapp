@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Modules\Mail\Http\Controllers\MailController;
 use Modules\Mail\Http\Controllers\Error;
 use Modules\Page\Http\Controllers\PageController;
+use Modules\Subpage\Http\Controllers\SubpageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,13 +16,6 @@ use Modules\Page\Http\Controllers\PageController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get(
-    '/',
-    function () {
-        return view('welcome');
-    }
-);
 
 Route::get(
     '/dashboard',
@@ -37,3 +31,4 @@ Route::resource('mails', MailController::class)
     ->middleware(['auth', 'ban']);
 Route::resource('pages', PageController::class);
 Route::get('/403', Error::class)->name('403');
+Route::get('/{subpage:slug?}', [SubpageController::class, 'show'])->name('subpage');

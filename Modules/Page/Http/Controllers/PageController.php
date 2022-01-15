@@ -1,10 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Page\Http\Controllers;
 
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Modules\Page\Entities\Page;
+use Modules\Page\Http\Requests\CreatePageRequest;
 
 class PageController extends Controller
 {
@@ -14,7 +18,9 @@ class PageController extends Controller
      */
     public function index()
     {
-        return view('page::index');
+        $pages = Page::all();
+
+        return view('page::page.index', ['pages' => $pages]);
     }
 
     /**
@@ -23,7 +29,7 @@ class PageController extends Controller
      */
     public function create()
     {
-        return view('page::create');
+        return view('page::page.create');
     }
 
     /**
@@ -31,9 +37,12 @@ class PageController extends Controller
      * @param Request $request
      * @return Renderable
      */
-    public function store(Request $request)
+    public function store(CreatePageRequest $request)
     {
-        //
+        $validated = $request->validated();
+        Page::create($validated);
+
+        return redirect()->route('pages.index')->with('status', 'Created');
     }
 
     /**
