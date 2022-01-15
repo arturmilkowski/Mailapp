@@ -5,7 +5,7 @@ namespace Modules\Mail\Http\Controllers;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Modules\Mail\Http\Requests\CreatePostRequest;
+use Modules\Mail\Http\Requests\CreateMailRequest;
 
 class MailController extends Controller
 {
@@ -32,7 +32,7 @@ class MailController extends Controller
      * @param Request $request
      * @return Renderable
      */
-    public function store(CreatePostRequest $request)
+    public function store(CreateMailRequest $request)
     {
         // return $request;
         $validated = $request->validated();
